@@ -1,16 +1,17 @@
 // Carrega tarefas ao iniciar a página
 document.addEventListener('DOMContentLoaded', () => {
+    // EVENT LISTENER 1: Carrega as tarefas do localStorage quando o DOM estiver pronto
     const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
     atualizarLista(tarefas);
     
-    // Adiciona evento de tecla Enter no input
+    // EVENT LISTENER 2: Adiciona evento de tecla Enter no input
     document.getElementById('tarefa').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             adicionarTarefa();
         }
     });
     
-    // Adiciona evento de clique no botão
+    // EVENT LISTENER 3: Adiciona evento de clique no botão
     document.getElementById('adicionarBtn').addEventListener('click', adicionarTarefa);
 });
 
@@ -35,6 +36,7 @@ function adicionarTarefa() {
             reader.onload = function(e) {
                 novaTarefa.imagem = e.target.result;
                 tarefas.push(novaTarefa);
+                // LOCALSTORAGE 1: Salva tarefas com imagem
                 localStorage.setItem('tarefas', JSON.stringify(tarefas));
                 input.value = '';
                 fileInput.value = '';
@@ -45,6 +47,7 @@ function adicionarTarefa() {
             reader.readAsDataURL(fileInput.files[0]);
         } else {
             tarefas.push(novaTarefa);
+            // LOCALSTORAGE 2: Salva tarefas sem imagem
             localStorage.setItem('tarefas', JSON.stringify(tarefas));
             input.value = '';
             fileInput.value = '';
@@ -106,11 +109,13 @@ function atualizarLista(tarefas) {
         const btnComplete = document.createElement('button');
         btnComplete.className = 'btn-success';
         btnComplete.innerHTML = tarefa.completa ? '<i class="fas fa-check"></i> Concluída' : '<i class="far fa-circle"></i> Feito';
+        // EVENT LISTENER 4: Alterna status de completude da tarefa
         btnComplete.onclick = () => toggleCompleta(index);
         
         const btnRemove = document.createElement('button');
         btnRemove.className = 'btn-danger';
         btnRemove.innerHTML = '<i class="fas fa-trash"></i> Remover';
+        // EVENT LISTENER 5: Remove tarefa
         btnRemove.onclick = () => removerTarefa(index);
         
         actions.appendChild(btnComplete);
@@ -125,6 +130,7 @@ function atualizarLista(tarefas) {
 function toggleCompleta(index) {
     const tarefas = JSON.parse(localStorage.getItem('tarefas'));
     tarefas[index].completa = !tarefas[index].completa;
+    // LOCALSTORAGE 3: Atualiza status de completude
     localStorage.setItem('tarefas', JSON.stringify(tarefas));
     atualizarLista(tarefas);
 }
@@ -132,6 +138,7 @@ function toggleCompleta(index) {
 function removerTarefa(index) {
     const tarefas = JSON.parse(localStorage.getItem('tarefas'));
     tarefas.splice(index, 1);
+    // LOCALSTORAGE 4: Remove tarefa do armazenamento
     localStorage.setItem('tarefas', JSON.stringify(tarefas));
     atualizarLista(tarefas);
 }
