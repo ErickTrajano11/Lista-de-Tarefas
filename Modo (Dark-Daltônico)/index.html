@@ -10,7 +10,17 @@
 </head>
 <body>
     <div class="container">
-        <h1><i class="fas fa-tasks"></i> Lista de Tarefas</h1>
+        <div class="header-container">
+            <h1><i class="fas fa-tasks"></i> Lista de Tarefas</h1>
+            <div class="mode-buttons">
+                <button id="toggleColorBlindMode" class="btn-toggle" title="Modo para Daltonismo">
+                    <i class="fas fa-eye"></i> Modo Daltonismo
+                </button>
+                <button id="toggleDarkMode" class="btn-toggle">
+                    <i class="fas fa-moon"></i> Modo Escuro
+                </button>
+            </div>
+        </div>
         
         <div class="input-group">
             <input type="text" id="tarefa" placeholder="Digite uma nova tarefa..." autofocus>

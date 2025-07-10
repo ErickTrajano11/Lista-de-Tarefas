@@ -1,5 +1,19 @@
 // Carrega tarefas ao iniciar a página
 document.addEventListener('DOMContentLoaded', () => {
+    // Verifica o modo escuro salvo no localStorage
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    if (darkMode) {
+        document.body.classList.add('dark-mode');
+        updateToggleButton(true);
+    }
+    
+    // Verifica o modo daltonismo salvo no localStorage
+    const colorBlindMode = localStorage.getItem('colorBlindMode') === 'true';
+    if (colorBlindMode) {
+        document.body.classList.add('color-blind-mode');
+        updateColorBlindButton(true);
+    }
+    
     // EVENT LISTENER 1: Carrega as tarefas do localStorage quando o DOM estiver pronto
     const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
     atualizarLista(tarefas);
@@ -13,7 +27,53 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // EVENT LISTENER 3: Adiciona evento de clique no botão
     document.getElementById('adicionarBtn').addEventListener('click', adicionarTarefa);
+    
+    // EVENT LISTENER 4: Alternar modo escuro/claro
+    document.getElementById('toggleDarkMode').addEventListener('click', toggleDarkMode);
+    
+    // EVENT LISTENER 5: Alternar modo daltonismo
+    document.getElementById('toggleColorBlindMode').addEventListener('click', toggleColorBlindMode);
 });
+
+function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle('dark-mode');
+    
+    const isDarkMode = body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isDarkMode);
+    
+    updateToggleButton(isDarkMode);
+}
+
+function toggleColorBlindMode() {
+    const body = document.body;
+    body.classList.toggle('color-blind-mode');
+    
+    const isColorBlindMode = body.classList.contains('color-blind-mode');
+    localStorage.setItem('colorBlindMode', isColorBlindMode);
+    
+    updateColorBlindButton(isColorBlindMode);
+}
+
+function updateToggleButton(isDarkMode) {
+    const toggleBtn = document.getElementById('toggleDarkMode');
+    if (isDarkMode) {
+        toggleBtn.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
+    } else {
+        toggleBtn.innerHTML = '<i class="fas fa-moon"></i> Modo Escuro';
+    }
+}
+
+function updateColorBlindButton(isColorBlindMode) {
+    const toggleBtn = document.getElementById('toggleColorBlindMode');
+    if (isColorBlindMode) {
+        toggleBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Modo Normal';
+        toggleBtn.style.backgroundColor = '#0066cc';
+    } else {
+        toggleBtn.innerHTML = '<i class="fas fa-eye"></i> Modo Daltonismo';
+        toggleBtn.style.backgroundColor = '';
+    }
+}
 
 function adicionarTarefa() {
     const input = document.getElementById('tarefa');
