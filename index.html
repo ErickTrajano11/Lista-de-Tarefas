@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Tarefas</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-green-tick-checkbox-vector-illustration-isolated-on-white-background-png-image_5000203.png">
+    <link rel="icon" type="image/x-icon"
+        href="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-green-tick-checkbox-vector-illustration-isolated-on-white-background-png-image_5000203.png">
 </head>
+
 <body>
     <div class="container">
-        <h1><i class="fas fa-tasks"></i> Lista de Tarefas</h1>
-        
+        <div class="header-container">
+            <h1><i class="fas fa-tasks"></i> Lista de Tarefas</h1><br>
+            <div class="mode-buttons">
+                <button id="toggleColorBlindMode" class="btn-toggle" title="Modo para Daltonismo">
+                    <i class="fas fa-eye"></i> Modo Daltonismo
+                </button>
+                <button id="toggleDarkMode" class="btn-toggle">
+                    <i class="fas fa-moon"></i> Modo Escuro
+                </button>
+                <button id="togglePinkMode" class="btn-toggle">
+                    Modo Normal/Rosa
+                </button>
+            </div>
+        </div>
+
+        <button id="clickCounter">Nº de Cliques: </button><br>
+
         <div class="input-group">
             <input type="text" id="tarefa" placeholder="Digite uma nova tarefa..." autofocus>
             <input type="file" id="imagemTarefa" accept="image/*" class="file-input">
             <button class="btn-primary" id="adicionarBtn">Adicionar</button>
         </div>
-        
+
         <ul id="listaTarefas"></ul>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
