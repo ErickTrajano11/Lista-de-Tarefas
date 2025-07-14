@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateColorBlindButton(true);
     }
 
-    // Verifica o modo daltonismo salvo no localStorage
+    // Verifica o modo rosa salvo no localStorage
     const colorPinkMode = localStorage.getItem('colorPinkMode') === 'true';
     if (colorPinkMode) {
         document.body.classList.add('pink-mode');

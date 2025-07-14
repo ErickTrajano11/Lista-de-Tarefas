@@ -25,28 +25,25 @@
     --completed: #666;
 }
 
-/* Nova paleta de cores para o modo rosa (mais suave e harmoniosa) */
 .pink-mode {
-    --bg-color: #FCE4EC; /* Rosa muito claro, quase branco, para o fundo principal */
-    --container-bg: #F8BBD0; /* Rosa claro para o container principal */
-    --text-color: #880E4F; /* Rosa escuro para o texto, garantindo legibilidade */
-    --task-bg: #FCE4EC; /* Rosa muito claro para o fundo das tarefas */
-    --completed-task-bg: #E91E63; /* Rosa vibrante para tarefas completas (ainda legível) */
-    --border-color: #F48FB1; /* Rosa médio para bordas e separadores */
-    --completed: #C2185B; /* Rosa mais escuro para texto de tarefas completas */
-
-    /* Ajustes para botões e elementos interativos no modo rosa */
-    --primary: #E91E63; /* Rosa vibrante para botões primários */
-    --secondary: #C2185B; /* Rosa mais escuro para hover de botões primários */
-    --success: #8BC34A; /* Verde suave para sucesso (contraste com rosa) */
-    --danger: #D32F2F; /* Vermelho suave para perigo (contraste com rosa) */
+    --bg-color: #FCE4EC; 
+    --container-bg: #F8BBD0; 
+    --text-color: #880E4F; 
+    --task-bg: #FCE4EC; 
+    --completed-task-bg: #E91E63; 
+    --border-color: #F48FB1;
+    --completed: #C2185B; 
+    --primary: #E91E63;
+    --secondary: #C2185B;
+    --success: #8BC34A;
+    --danger: #D32F2F;
 }
 
 .color-blind-mode {
-    --primary: #0066cc; /* Azul mais perceptível */
+    --primary: #0066cc; 
     --secondary: #004080;
-    --success: #00aa00; /* Verde escuro */
-    --danger: #cc0000; /* Vermelho intenso */
+    --success: #00aa00; 
+    --danger: #cc0000;
     --completed: #777777;
 }
 
@@ -68,8 +65,11 @@
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.6;
     padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
     transition: background-color 0.3s, color 0.3s;
 }
 
@@ -77,9 +77,11 @@ body {
     max-width: 800px;
     margin: 0 auto;
     background: var(--container-bg);
+    background: var(--container-bg);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
     transition: background-color 0.3s;
 }
 
@@ -88,6 +90,12 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+h1 {
+    margin: 0;
     flex-wrap: wrap;
     gap: 15px;
 }
@@ -125,10 +133,9 @@ h1 {
     background-color: var(--secondary);
 }
 
-/* Estilos específicos para o modo daltonismo */
 .color-blind-mode .btn-success {
     background-color: var(--success);
-    color: black; /* Texto preto para melhor contraste */
+    color: black;
     font-weight: bold;
 }
 
@@ -160,10 +167,13 @@ h1 {
     flex: 2;
     padding: 12px 15px;
     border: 2px solid var(--border-color);
+    border: 2px solid var(--border-color);
     border-radius: 6px;
     font-size: 16px;
     transition: border 0.3s;
     min-width: 200px;
+    background-color: var(--container-bg);
+    color: var(--text-color);
     background-color: var(--container-bg);
     color: var(--text-color);
 }
@@ -172,9 +182,12 @@ h1 {
     flex: 1;
     padding: 8px;
     border: 2px solid var(--border-color);
+    border: 2px solid var(--border-color);
     border-radius: 6px;
     font-size: 14px;
     min-width: 150px;
+    background-color: var(--container-bg);
+    color: var(--text-color);
     background-color: var(--container-bg);
     color: var(--text-color);
 }
@@ -234,9 +247,11 @@ button {
     flex-direction: column;
     padding: 15px;
     background-color: var(--task-bg);
+    background-color: var(--task-bg);
     border-radius: 6px;
     margin-bottom: 15px;
     animation: fadeIn 0.3s ease-out;
+    transition: background-color 0.3s;
     transition: background-color 0.3s;
 }
 
@@ -252,6 +267,7 @@ button {
     height: 100px;
     border-radius: 4px;
     overflow: hidden;
+    background-color: var(--border-color);
     background-color: var(--border-color);
     display: flex;
     align-items: center;
@@ -272,9 +288,11 @@ button {
     word-break: break-word;
     margin-bottom: 8px;
     color: var(--text-color);
+    color: var(--text-color);
 }
 
 #listaTarefas li.completed {
+    background-color: var(--completed-task-bg);
     background-color: var(--completed-task-bg);
 }
 
@@ -316,6 +334,11 @@ button {
     .task-image-container {
         max-width: 100%;
         height: auto;
+    }
+    
+    .header-container {
+        flex-direction: column;
+        align-items: stretch;
     }
     
     .header-container {
