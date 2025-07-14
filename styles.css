@@ -7,6 +7,55 @@
     --dark: #212529;
     --gray: #6c757d;
     --completed: #adb5bd;
+    --bg-color: #f5f7fa;
+    --container-bg: white;
+    --text-color: var(--dark);
+    --task-bg: #f8f9fa;
+    --completed-task-bg: #e9ecef;
+    --border-color: #e9ecef;
+}
+
+.dark-mode {
+    --bg-color: #121212;
+    --container-bg: #1e1e1e;
+    --text-color: #f8f9fa;
+    --task-bg: #2d2d2d;
+    --completed-task-bg: #252525;
+    --border-color: #444;
+    --completed: #666;
+}
+
+/* Nova paleta de cores para o modo rosa (mais suave e harmoniosa) */
+.pink-mode {
+    --bg-color: #FCE4EC; /* Rosa muito claro, quase branco, para o fundo principal */
+    --container-bg: #F8BBD0; /* Rosa claro para o container principal */
+    --text-color: #880E4F; /* Rosa escuro para o texto, garantindo legibilidade */
+    --task-bg: #FCE4EC; /* Rosa muito claro para o fundo das tarefas */
+    --completed-task-bg: #E91E63; /* Rosa vibrante para tarefas completas (ainda legível) */
+    --border-color: #F48FB1; /* Rosa médio para bordas e separadores */
+    --completed: #C2185B; /* Rosa mais escuro para texto de tarefas completas */
+
+    /* Ajustes para botões e elementos interativos no modo rosa */
+    --primary: #E91E63; /* Rosa vibrante para botões primários */
+    --secondary: #C2185B; /* Rosa mais escuro para hover de botões primários */
+    --success: #8BC34A; /* Verde suave para sucesso (contraste com rosa) */
+    --danger: #D32F2F; /* Vermelho suave para perigo (contraste com rosa) */
+}
+
+.color-blind-mode {
+    --primary: #0066cc; /* Azul mais perceptível */
+    --secondary: #004080;
+    --success: #00aa00; /* Verde escuro */
+    --danger: #cc0000; /* Vermelho intenso */
+    --completed: #777777;
+}
+
+.color-blind-mode.dark-mode {
+    --primary: #4d88ff;
+    --secondary: #1a66cc;
+    --success: #00cc00;
+    --danger: #ff3333;
+    --completed: #999999;
 }
 
 * {
@@ -17,29 +66,87 @@
 }
 
 body {
-    background-color: #f5f7fa;
-    color: var(--dark);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.6;
     padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
-    background: white;
+    background: var(--container-bg);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 25px;
+    margin: 0;
     color: var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-toggle {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background-color: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-toggle:hover {
+    background-color: var(--secondary);
+}
+
+/* Estilos específicos para o modo daltonismo */
+.color-blind-mode .btn-success {
+    background-color: var(--success);
+    color: black; /* Texto preto para melhor contraste */
+    font-weight: bold;
+}
+
+.color-blind-mode .btn-danger {
+    background-color: var(--danger);
+    color: white;
+    font-weight: bold;
+}
+
+.color-blind-mode .btn-primary {
+    background-color: var(--primary);
+    color: white;
+    font-weight: bold;
+}
+
+.color-blind-mode #listaTarefas li.completed .task-text {
+    color: var(--completed);
+    font-style: italic;
 }
 
 .input-group {
@@ -52,20 +159,24 @@ h1 {
 #tarefa {
     flex: 2;
     padding: 12px 15px;
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--border-color);
     border-radius: 6px;
     font-size: 16px;
     transition: border 0.3s;
     min-width: 200px;
+    background-color: var(--container-bg);
+    color: var(--text-color);
 }
 
 .file-input {
     flex: 1;
     padding: 8px;
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--border-color);
     border-radius: 6px;
     font-size: 14px;
     min-width: 150px;
+    background-color: var(--container-bg);
+    color: var(--text-color);
 }
 
 #tarefa:focus, .file-input:focus {
@@ -122,10 +233,11 @@ button {
     display: flex;
     flex-direction: column;
     padding: 15px;
-    background-color: #f8f9fa;
+    background-color: var(--task-bg);
     border-radius: 6px;
     margin-bottom: 15px;
     animation: fadeIn 0.3s ease-out;
+    transition: background-color 0.3s;
 }
 
 .task-content {
@@ -140,7 +252,7 @@ button {
     height: 100px;
     border-radius: 4px;
     overflow: hidden;
-    background-color: #e9ecef;
+    background-color: var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,10 +271,11 @@ button {
 .task-text {
     word-break: break-word;
     margin-bottom: 8px;
+    color: var(--text-color);
 }
 
 #listaTarefas li.completed {
-    background-color: #e9ecef;
+    background-color: var(--completed-task-bg);
 }
 
 #listaTarefas li.completed .task-text {
@@ -203,5 +316,10 @@ button {
     .task-image-container {
         max-width: 100%;
         height: auto;
+    }
+    
+    .header-container {
+        flex-direction: column;
+        align-items: stretch;
     }
 }
